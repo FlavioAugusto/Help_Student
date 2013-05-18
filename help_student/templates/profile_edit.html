@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="well">
+            <form class="form-horizontal" action="" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Perfil</legend>
+                    {{ form.errors }}
+                    {{ message }}
+                    <div class="control-group">
+                        <label class="control-label" >{{ form.username.label_tag }}</label>
+                        {{ form.username }}
+                        {{ form.username.error_messages }}
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" >{{ form.first_name.label_tag }}</label>
+                        {{ form.first_name }}
+                        {{ form.first_name.error_messages }}
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" >{{ form.last_name.label_tag }}</label>
+                        {{ form.last_name }}
+                        {{ form.last_name.error_messages }}
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" >{{ form.email.label_tag }}</label>
+                        {{ form.email }}
+                        {{ form.email.error_messages }}
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" class="btn btn-success" value="Editar">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

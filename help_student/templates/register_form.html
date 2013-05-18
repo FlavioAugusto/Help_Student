@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="well">
+            <form class="form-horizontal" action="." method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>{{ legend }}</legend>
+                    {{ message }}
+                    {% for fields in form %}
+                        {{ fields.erros }}
+                        <div class="control-group">
+                            <label class="control-label" for="{{ fields.label }}">{{ fields.label }}:</label>
+                            {{ fields }}
+                            <div class="controls">
+                                {{ fields.errors }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" class="btn btn-success" value="{% if legend == 'Cadastro' %}Cadastrar {% else %}Salvar{% endif %}">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

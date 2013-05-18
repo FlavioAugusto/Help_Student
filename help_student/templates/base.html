@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Help Student{% endblock %}</title>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css"/>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="tab-content">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Home</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="">
+                        <a href="/matter">Registrar Matéria</a>
+                    </li>
+                    <li class="">
+                        <a href="/matter/status/">Matérias</a>
+                    </li>
+                    <li class="">
+                        <a href="/accounts/profile/">Perfil</a>
+                    </li>
+                    <li class="">
+                        <a href="/ranking">Ranking</a>
+                    </li>
+                    <li class="">
+                        <a href="../..{% url logout %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+    </div>
+
+</div>
+<div class="container">
+    <hr>
+    <h1>Help Student</h1>
+    <p class="lead">Criado para melhor interação de estudantes e principalmente ajudar nos estudos</p>
+
+
+{% block content %} {% endblock content %}
+
+</div>
+</body>
+</html>

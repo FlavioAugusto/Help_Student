@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form class="form-horizontal" action="" method="POST">
+        {% csrf_token %}
+        <div class="control-group">
+            <div class="controls">
+                {{ form }}
+                <input type="submit" class="btn btn-success" value="Mudar">
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+    <tbody>
+        <tr>
+            <td class="span3"></td>
+            <td>Matéria</td>
+            <td>Nota</td>
+            <td>Estado</td>
+        </tr>
+        {% for infos in info %}
+            <tr{% if infos.nr_record < 60 %} class="warning" {% endif %}>
+                <td></td>
+                <td>{{ infos.matter }}</td>
+                <td>{{ infos.nr_record }}</td>
+                <td>{{ infos.get_tp_help_display }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock content %}

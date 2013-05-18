@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="well">
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <form class="form-horizontal" method="post" action="{% url django.contrib.auth.views.login %}">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Login</legend>
+                    {% for field in form %}
+                        <div class="control-group">
+                            <div class="control-label">{{ field.label_tag }}</div>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" value="login" class="btn btn-success"/>
+                            <a href="{% url cadastro %}"><button type="button" class="btn btn-success">Cadastre-se</button></a
+                            <input type="hidden" name="next" value="{{ next }}" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
