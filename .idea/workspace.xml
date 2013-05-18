@@ -11,7 +11,7 @@
     <file path="/base.html" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1368274670828" ignored="false" />
     <file path="/views.py" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1368746212404" ignored="false" />
     <file path="/urls.py" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1368274875621" ignored="false" />
-    <file path="/settings.py" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1368917537803" ignored="false" />
+    <file path="/settings.py" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1368918166705" ignored="false" />
     <file path="/custom_form.html" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1366732259005" ignored="false" />
     <file path="/bootstrap.css" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1366283406646" ignored="false" />
     <file path="/student.py" changelist="49280efa-843e-4895-b84f-9eb56cb83b27" time="1368233304381" ignored="false" />
@@ -93,7 +93,7 @@
       <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Help_Student/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="32" selection-start="1996" selection-end="1996" vertical-scroll-proportion="0.5392491">
+            <state line="2" column="13" selection-start="58" selection-end="58" vertical-scroll-proportion="0.102389075">
               <folding />
             </state>
           </provider>
@@ -563,7 +563,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Help_Student/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="32" selection-start="1996" selection-end="1996" vertical-scroll-proportion="0.5392491">
+        <state line="2" column="13" selection-start="58" selection-end="58" vertical-scroll-proportion="0.102389075">
           <folding />
         </state>
       </provider>
