@@ -14,19 +14,18 @@
         <tbody>
         <tr>
             <td class="span3"></td>
-            <td>Estudante</td>
-            <td>Ciclo</td>
             <td>Posição</td>
+            <td>Estudante</td>
+            <td>Média</td>
         </tr>
         {% for infos in info %}
             <tr>
                 <td></td>
-                <td>{{ infos }}</td>
-                <td>{{ infos }}</td>
-                <td>{{ infos.get_tp_help_display }}</td>
+                <td>{{ infos.get_index }}º</td>
+                <td>{{ infos.student }}</td>
+                <td>{{ infos.record }}</td>
             </tr>
         {% endfor %}
-        {{ info }}
         </tbody>
     </table>
 {% endblock content %}

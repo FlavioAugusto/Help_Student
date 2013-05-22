@@ -102,41 +102,36 @@ def teste(query_string):
 
 @login_required()
 def ranking(request):
-    student = make_avg()
+
     if request.POST:
         form = RankingForm(request.POST)
         if form.is_valid():
-            # period = form.cleaned_data["nr_period"]
-            # matter = form.cleaned_data["matter"]
-            # if period:
+            period = form.cleaned_data["nr_period"]
+            matter = form.cleaned_data["matter"]
+            # if period and not matter:
             #     student = StudentHasMatter.objects.filter(nr_period=period)
-            # if matter:
+            # if matter and not period:
             #     student = StudentHasMatter.objects.filter(matter=matter)
             # if period and matter:
-            #     student = StudentHasMatter.objects.filter(nr_period=period, matter=matter,)
-            student = make_avg()
+            student = StudentHasMatter.objects.filter(nr_period=period, matter=matter,)
+            student = make_avg(student)
 
     else:
         form = RankingForm()
+        student = StudentHasMatter.objects.all()
+        student = make_avg(student)
     return direct_to_template(request, 'ranking.html', {'info': student, 'form': form,})
 
-def make_avg():
-    students = User.objects.all()
-    student_dict = {}
+
+def make_avg(students):
+    student_list = []
     for student in students:
+        new_record = 0
         records = StudentHasMatter.objects.filter(student=student).values('nr_record')
         if records:
             for record in records:
-                records += record['nr_record']
-            student_dict.update({student.id:{'student':student.id, 'record':records}})
+                new_record += record['nr_record']
+            new_record = new_record / len(records)
+            student_list.append({'student': student.student.get_full_name(), 'record': new_record})
 
-
-    students_avg = {}
-    student_list = []
-    for student in students:
-        if students_avg.has_key(student['student']):
-            students_avg[student['student']] += student['student']
-        else:
-            students_avg[student['student']] = student['student']
-
-    return students_avg
+    return student_list

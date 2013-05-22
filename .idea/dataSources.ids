@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Help Student" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="86675e78-b52c-4f3a-9e48-45c4145d3403">
+    <synchronize>true</synchronize>
+    <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+    <jdbc-url>jdbc:postgresql://ec2-174-129-204-172.compute-1.amazonaws.com:5432/ddj69vv1l711vt</jdbc-url>
+    <user-name>icvqtvyxfqkbwx</user-name>
+    <user-password>dfe5df99dfefdf9edf9fdfeedfcedfdedfd0df9ddfe0dfe7dfe6dfdcdfc0dfe8dfdbdfc4dfe9dfcfdff8dfcfdf99dfc3df9fdfc1</user-password>
+    <libraries>
+      <library>
+        <url>jar://$PROJECT_DIR$/../postgresql-9.1-901.jdbc4.jar!/</url>
+      </library>
+      <library>
+        <url>file://$PROJECT_DIR$/../postgresql-driver-license.txt</url>
+      </library>
+    </libraries>
+  </data-source>
+</component>
