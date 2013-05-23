@@ -15,7 +15,7 @@ from help_student.models import StudentHasMatter, Matter
 
 
 def home(request):
-    return direct_to_template(request, template='base.html')
+    return direct_to_template(request, 'base.html',)
 
 
 def register(request):
@@ -108,30 +108,37 @@ def ranking(request):
         if form.is_valid():
             period = form.cleaned_data["nr_period"]
             matter = form.cleaned_data["matter"]
-            # if period and not matter:
-            #     student = StudentHasMatter.objects.filter(nr_period=period)
-            # if matter and not period:
-            #     student = StudentHasMatter.objects.filter(matter=matter)
-            # if period and matter:
-            student = StudentHasMatter.objects.filter(nr_period=period, matter=matter,)
+            if period and matter:
+                student = StudentHasMatter.objects.filter(nr_period=period, matter=matter,)
+            elif period:
+                student = StudentHasMatter.objects.filter(nr_period=period)
+            elif matter:
+                student = StudentHasMatter.objects.filter(matter=matter)
+            else:
+                student = StudentHasMatter.objects.all()
             student = make_avg(student)
 
     else:
         form = RankingForm()
         student = StudentHasMatter.objects.all()
         student = make_avg(student)
-    return direct_to_template(request, 'ranking.html', {'info': student, 'form': form,})
+
+    return direct_to_template(request, 'ranking.html', {'infos': student, 'form': form, })
 
 
 def make_avg(students):
-    student_list = []
+    student_list = list()
     for student in students:
         new_record = 0
-        records = StudentHasMatter.objects.filter(student=student).values('nr_record')
+        records = students.filter(student_id=student.student.id).values('nr_record')
         if records:
             for record in records:
                 new_record += record['nr_record']
             new_record = new_record / len(records)
-            student_list.append({'student': student.student.get_full_name(), 'record': new_record})
+            new = {'student': student.student.get_full_name(), 'record': new_record}
+            if new not in student_list:
+                student_list.append(new)
 
-    return student_list
+    student_list.sort(reverse=True)
+    return student_list[:10]
+
