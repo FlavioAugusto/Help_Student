@@ -1,17 +1,12 @@
 # -*- coding:utf-8 -*-
-from itertools import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.db import connection
-from django.db.models import Count, Avg
-from django.db.models.query_utils import Q
 from django.http import HttpResponseRedirect
 from django.views.generic.simple import direct_to_template
 from help_student.forms.matter import MatterPeriodForm
 from help_student.forms.student import StudentProfileForm
 from help_student.forms.student_has_matter import MatterRegisterForm, RankingForm
-from help_student.models import StudentHasMatter, Matter
+from help_student.models import StudentHasMatter
 
 
 def home(request):
@@ -83,21 +78,6 @@ def status_matter(request):
         form = MatterPeriodForm()
 
     return direct_to_template(request, 'status_matter.html', {'info': student, 'form': form})
-
-
-def teste(query_string):
-    cursor = connection.cursor()
-    cursor.execute(query_string)
-    col_names = [desc[0] for desc in cursor.description]
-    row_list = []
-    while True:
-        row = cursor.fetchone()
-        if row is None:
-            break
-        row_dict = dict(izip(col_names, row))
-        # student = teste('select student_id, AVG(nr_record) as media from student_has_matter group by student_id order by -media;')
-        row_list.append(row_dict)
-    return row_list
 
 
 @login_required()
