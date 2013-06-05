@@ -151,3 +151,10 @@ LOGGING = {
         },
     }
 }
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'flavio1992'
+EMAIL_HOST_USER = 'help.student.contact@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
