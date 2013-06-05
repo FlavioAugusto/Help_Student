@@ -9,5 +9,7 @@ Scripts
 .Python
 *.pyc
 *~
+*db
+.idea
 .DS_Store
 
