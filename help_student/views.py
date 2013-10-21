@@ -44,13 +44,15 @@ def register_matter(request):
                 tp_help = 2
             else:
                 tp_help = 1
+            nr_record = form.cleaned_data['nr_record']
+            nr_period = form.cleaned_data['nr_period']
 
             student_matter, has_matter = StudentHasMatter.objects.get_or_create(
                 student=request.user,
-                matter=form.cleaned_data['matter'])
+                matter=form.cleaned_data['matter'], defaults={'nr_record': nr_record, 'nr_period': nr_period})
 
-            student_matter.nr_record = form.cleaned_data['nr_record']
-            student_matter.nr_period = form.cleaned_data['nr_period']
+            student_matter.nr_record = nr_record
+            student_matter.nr_period = nr_period
             student_matter.tp_help = tp_help
             student_matter.save()
 

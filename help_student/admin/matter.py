@@ -43,3 +43,5 @@ class MatterAdmin(admin.ModelAdmin):
     shot_email_action.short_description = 'Enviar e-mails'
 
 
+    # def get_matter_view(self):
+    #     from splinter import Browser

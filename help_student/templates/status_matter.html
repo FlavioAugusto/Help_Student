@@ -3,10 +3,12 @@
     <form class="form-horizontal" action="" method="POST">
         {% csrf_token %}
         <div class="control-group">
-            <div class="controls">
+            <div class="{% if form.errors %}alert-error{% endif %}">
+            <div class="controls ">
                 {{ form }}
-                <input type="submit" class="btn btn-success" value="Mudar">
+                <input type="submit" class="btn btn-success" value="Filtrar">
                 <a href="/matter"><input type="button" class="btn btn-success" value="Cadastrar Matéria"></a>
+            </div>
             </div>
         </div>
     </form>

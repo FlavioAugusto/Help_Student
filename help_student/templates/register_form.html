@@ -9,12 +9,14 @@
                     {{ message }}
                     {% for fields in form %}
                         {{ fields.erros }}
+                        <div class="{% if fields.errors %}alert-error{% endif %}">
                         <div class="control-group">
                             <label class="control-label" for="{{ fields.label }}">{{ fields.label }}:</label>
                             {{ fields }}
                             <div class="controls">
                                 {{ fields.errors }}
                             </div>
+                        </div>
                         </div>
                     {% endfor %}
                     <div class="control-group">
