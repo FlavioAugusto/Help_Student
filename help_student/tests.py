@@ -9,6 +9,9 @@ from django.core.urlresolvers import reverse
 
 from django.test import TestCase
 from help_student.models import Matter, StudentHasMatter
+import mock
+import help_student.admin.matter
+from help_student.models.student_has_matter import GOOD_NEWS
 
 
 class SimpleTest(TestCase):
@@ -22,11 +25,11 @@ class SimpleTest(TestCase):
 class GenericTests(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='user.teste', password='12345')
+        self.user = User.objects.create_user(username='user.teste1', password='12345', email='teste1@testes.com.br')
         Matter.objects.create(id=1, nm_matter='materia teste1', nr_difficulty=9)
         Matter.objects.create(id=2, nm_matter='materia teste2', nr_difficulty=3)
         Matter.objects.create(id=3, nm_matter='materia teste3', nr_difficulty=4)
-        self.client.login(username='user.teste', password='12345')
+        self.client.login(username='user.teste1', password='12345')
 
     def test_registra_materia(self):
         shm = StudentHasMatter.objects.all()
@@ -78,6 +81,7 @@ class GenericTests(TestCase):
         self.client.post(reverse('materia'), data=data)
         shm = StudentHasMatter.objects.all()
 
+        self.assertEquals(shm.count(), 1)
         self.assertEquals(shm[0].tp_help, 1)
 
     def test_estudante_pode_ajudar(self):
@@ -89,6 +93,7 @@ class GenericTests(TestCase):
         self.client.post(reverse('materia'), data=data)
         shm = StudentHasMatter.objects.all()
 
+        self.assertEquals(shm.count(), 1)
         self.assertEquals(shm[0].tp_help, 2)
 
     def test_retorna_todas_as_materias(self):
@@ -146,5 +151,21 @@ class GenericTests(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.context['user'].studenthasmatter_set.filter(nr_period=1).count(), 2)
 
+    def test_envia_email(self):
+        user = User.objects.create_user(username='user.teste2', password='12345', email='teste2@testes.com.br')
+        StudentHasMatter.objects.create(student_id=1, matter_id=1, nr_period=0, nr_record=70, tp_help=2)
+        StudentHasMatter.objects.create(student_id=2, matter_id=1, nr_period=0, nr_record=40, tp_help=1)
 
+        with mock.patch.object(help_student.admin.matter, 'send_mail'):
+            matter = Matter.objects.filter(id=1)
+            help_student.admin.MatterAdmin(mock.MagicMock(), mock.MagicMock()).shot_email_action(mock.MagicMock(), matter)
+            self.assertEquals(help_student.admin.matter.send_mail.call_count, 1)
 
+            message = GOOD_NEWS['message'] % (
+                'user.teste1',
+                'user.teste2',
+                'materia teste1',
+                'teste2@testes.com.br'
+            )
+            my_mock = mock.call(GOOD_NEWS['subject'], message, 'noreplay@help-student.com.br', ['teste1@testes.com.br'])
+            self.assertEquals([my_mock], help_student.admin.matter.send_mail.call_args_list)

@@ -1,7 +1,9 @@
 # -*- coding:utf-8 -*-
 from django.contrib import admin
+from Help_Student import settings
 from help_student.models import StudentHasMatter
 from django.core.mail import send_mail
+from help_student.models.student_has_matter import GOOD_NEWS, BAD_NEWS
 
 
 class MatterAdmin(admin.ModelAdmin):
@@ -16,19 +18,12 @@ class MatterAdmin(admin.ModelAdmin):
                 if user:
                     if i <= (users_total / 2):
                         if user.nr_record >= 60:
-                            help_message = u'[Help Student] Ajuar é sempre bom'
-                            message = u'Bom dia %s,' \
-                                      u'\r o(a) estudante %s precisa de ajuda para estudar %s.' \
-                                      u'\r Você poderia adjuda-lo(la) com suas dúvidas?' \
-                                      u'\r aqui está o e-mail dele(a) para que possa entrar em contato: %s'
+                            help_message = GOOD_NEWS['subject']
+                            message = GOOD_NEWS['message']
 
                         else:
-                            help_message = u'[Help Student] Não é vergonha alguma perdir ajuda'
-                            message = u'Bom dia %s,' \
-                                      u'\r o(a) estudante %s pode lhe ajudar à estudar %s.' \
-                                      u'\r Você poderia pedir a sua ajuda e tirar suas dúvidas?' \
-                                      u'\r aqui está o e-mail dele(a) para que possa entrar em contato: %s'
-
+                            help_message = BAD_NEWS['message']
+                            message = BAD_NEWS['message']
                         message = message % (
                             users[i].student.get_full_name(),
                             users[-i].student.get_full_name(),
