@@ -169,3 +169,6 @@ class GenericTests(TestCase):
             )
             my_mock = mock.call(GOOD_NEWS['subject'], message, 'noreplay@help-student.com.br', ['teste1@testes.com.br'])
             self.assertEquals([my_mock], help_student.admin.matter.send_mail.call_args_list)
+#AssertionError: [
+#                    call(u'[Help Student] Ajuar \xe9 sempre bom', u'Bom dia user.teste1,\r o(a) estudante user.teste2 precisa de ajuda para estudar materia teste1.\r Voc\xea poderia adjuda-lo(la) com suas d\xfavidas?\r aqui est\xe1 o e-mail dele(a) para que possa entrar em contato: teste2@testes.com.br', 'noreplay@help-student.com.br', ['teste1@testes.com.br'])
+#                ] ![call(u'[Help Student] Ajuar \xe9 sempre bom', u'Bom dia            ,\r o(a) estudante             precisa de ajuda para estudar materia teste1.\r Voc\xea poderia adjuda-lo(la) com suas d\xfavidas?\r aqui est\xe1 o e-mail dele(a) para que possa entrar em contato: teste2@testes.com.br', 'noreplay@help-student.com.br', [u'teste1@testes.com.br'])]
